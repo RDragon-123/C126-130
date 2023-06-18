@@ -7,6 +7,11 @@ leftWristY=0;
 rightWristX=0;
 
 rightWristY=0;
+
+scoreLeftWrist=0;
+
+songStatus1=song_shakeItOff.isPlaying();
+songStatus2='';
 function preload(){
 
     song = loadSound("Taylor_Swift_-_Shake_It_Off_[NaijaGreen.Com]_.mp3")
@@ -26,6 +31,18 @@ function setup(){
 
 function draw(){
     image(video,0,0,600,500);
+
+    fill("#f57914");
+    stroke("#f57914");
+
+    if(scoreLeftWrist>0.2){
+        circle(leftWristX,leftWristY,20);
+        song_readyForIt.stop()
+        if(songStatus1 == false){
+            shakeItOff.play()
+        }
+}
+
 }
 
 function modelLoaded(){
@@ -37,8 +54,6 @@ function gotPoses(results){
         console.log(results);
  
      scoreLeftWrist =  results[0].pose.keypoints[9].score;
- 
-     scoreRightWrist = results[0].pose.keypoints[10].score;
      
     }
  }
